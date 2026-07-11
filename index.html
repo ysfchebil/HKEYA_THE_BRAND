@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STORY — HKEYA THE BRAND</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#0a0a0a',
+                            dark: '#111111',
+                            gray: '#1a1a1a',
+                            mid: '#2a2a2a',
+                            red: '#DC2626',
+                            redDark: '#991B1B',
+                            redLight: '#EF4444',
+                            bone: '#E5E5E5',
+                            muted: '#737373',
+                            faint: '#404040',
+                        }
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif']
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #E5E5E5;
+            overflow-x: hidden
+        }
+        
+         ::selection {
+            background: rgba(220, 38, 38, .4);
+            color: #fff
+        }
+        
+         ::-webkit-scrollbar {
+            width: 6px
+        }
+        
+         ::-webkit-scrollbar-track {
+            background: #0a0a0a
+        }
+        
+         ::-webkit-scrollbar-thumb {
+            background: #2a2a2a;
+            border-radius: 3px
+        }
+        
+         ::-webkit-scrollbar-thumb:hover {
+            background: #DC2626
+        }
+        
+        .red-line {
+            width: 60px;
+            height: 2px;
+            background: #DC2626
+        }
+        
+        .nav-link {
+            position: relative
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #DC2626;
+            transition: width .3s ease
+        }
+        
+        .nav-link:hover::after {
+            width: 100%
+        }
+        
+        .btn-primary {
+            background: #DC2626;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            transition: all .3s ease
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .15), transparent);
+            transition: left .5s ease
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%
+        }
+        
+        .btn-primary:hover {
+            background: #EF4444;
+            box-shadow: 0 0 30px rgba(220, 38, 38, .3)
+        }
+        
+        .btn-outline {
+            border: 1px solid #404040;
+            color: #E5E5E5;
+            transition: all .3s ease
+        }
+        
+        .btn-outline:hover {
+            border-color: #DC2626;
+            color: #DC2626;
+            background: rgba(220, 38, 38, .05)
+        }
+        
+        .btn-ghost {
+            background: transparent;
+            color: #E5E5E5;
+            transition: all .3s ease
+        }
+        
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, .05)
+        }
+        
+        .marquee-track {
+            display: flex;
+            width: max-content
+        }
+        
+        @keyframes marquee {
+            0% {
+                transform: translateX(0)
+            }
+            100% {
+                transform: translateX(-50%)
+            }
+        }
+        
+        .animate-marquee {
+            animation: marquee 25s linear infinite
+        }
+        
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 20px rgba(220, 38, 38, .1)
+            }
+            to {
+                box-shadow: 0 0 40px rgba(220, 38, 38, .25)
+            }
+        }
+        
+        .animate-glow {
+            animation: glow 2s ease-in-out infinite alternate
+        }
+        
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+            50% {
+                transform: translateY(-15px)
+            }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite
+        }
+        
+        .product-img-wrap {
+            position: relative;
+            overflow: hidden
+        }
+        
+        .product-img-wrap .img-back {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity .5s ease
+        }
+        
+        .product-img-wrap:hover .img-back {
+            opacity: 1
+        }
+        
+        .product-img-wrap .img-front {
+            transition: opacity .5s ease
+        }
+        
+        .product-img-wrap:hover .img-front {
+            opacity: 0
+        }
+        
+        .size-btn {
+            transition: all .2s ease
+        }
+        
+        .size-btn:hover {
+            border-color: #DC2626;
+            color: #DC2626
+        }
+        
+        .size-btn.active {
+            background: #DC2626;
+            border-color: #DC2626;
+            color: #fff
+        }
+        
+        .product-card {
+            transition: all .5s cubic-bezier(.25, .46, .45, .94)
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px)
+        }
+        
+        .product-card:hover .product-border {
+            border-color: rgba(220, 38, 38, .4)
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+            background: #1a1a1a;
+            border: 1px solid rgba(220, 38, 38, .3);
+            padding: 16px 24px;
+            border-radius: 12px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all .4s cubic-bezier(.25, .46, .45, .94)
+        }
+        
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(10, 10, 10, .98);
+            backdrop-filter: blur(20px);
+            transform: translateX(100%);
+            transition: transform .4s cubic-bezier(.25, .46, .45, .94)
+        }
+        
+        .mobile-menu.open {
+            transform: translateX(0)
+        }
+        
+        .hero-gradient {
+            background: radial-gradient(ellipse at 50% 0%, rgba(220, 38, 38, .12) 0%, transparent 60%), radial-gradient(ellipse at 80% 50%, rgba(220, 38, 38, .06) 0%, transparent 50%), #0a0a0a
+        }
+        
+        .grid-bg {
+            background-image: linear-gradient(rgba(220, 38, 38, .03) 1px, transparent 1px), linear-gradient(90deg, rgba(220, 38, 38, .03) 1px, transparent 1px);
+            background-size: 60px 60px
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all .8s cubic-bezier(.25, .46, .45, .94)
+        }
+        
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0)
+        }
+        
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: all .8s cubic-bezier(.25, .46, .45, .94)
+        }
+        
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0)
+        }
+        
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: all .8s cubic-bezier(.25, .46, .45, .94)
+        }
+        
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0)
+        }
+        
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(.9);
+            transition: all .8s cubic-bezier(.25, .46, .45, .94)
+        }
+        
+        .reveal-scale.visible {
+            opacity: 1;
+            transform: scale(1)
+        }
+        
+        .cursor-dot {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: #DC2626;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform .1s ease
+        }
+        
+        .cursor-ring {
+            position: fixed;
+            width: 36px;
+            height: 36px;
+            border: 1.5px solid rgba(220, 38, 38, .4);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all .15s ease
+        }
+        
+        .cursor-ring.hover {
+            width: 56px;
+            height: 56px;
+            border-color: rgba(220, 38, 38, .7);
+            background: rgba(220, 38, 38, .05)
+        }
+        
+        .magnetic {
+            transition: transform .3s ease
+        }
+        
+        .stagger-children>* {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all .5s ease
+        }
+        
+        .stagger-children.visible>*:nth-child(1) {
+            transition-delay: .05s;
+            opacity: 1;
+            transform: translateY(0)
+        }
+        
+        .stagger-children.visible>*:nth-child(2) {
+            transition-delay: .1s;
+            opacity: 1;
+            transform: translateY(0)
+        }
+        
+        .stagger-children.visible>*:nth-child(3) {
+            transition-delay: .15s;
+            opacity: 1;
+            transform: translateY(0)
+        }
+        
+        .stagger-children.visible>*:nth-child(4) {
+            transition-delay: .2s;
+            opacity: 1;
+            transform: translateY(0)
+        }
+        
+        .parallax-layer {
+            will-change: transform;
+            transition: transform .1s linear
+        }
+        /* FIXED LOGO CLASSES - Renders normal colors instead of flattening to white/grey */
+        
+        .logo-light {
+            filter: none;
+            opacity: 1
+        }
+        
+        .logo-light-sm {
+            filter: none;
+            opacity: 1
+        }
+        
+        .logo-light-md {
+            filter: none;
+            opacity: 1
+        }
+        
+        @keyframes redPulse {
+            0%,
+            100% {
+                filter: drop-shadow(0 0 4px rgba(220, 38, 38, .3))
+            }
+            50% {
+                filter: drop-shadow(0 0 12px rgba(220, 38, 38, .6))
+            }
+        }
+        
+        .red-pulse {
+            animation: redPulse 3s ease-in-out infinite
+        }
+        
+        .line-draw {
+            width: 0;
+            height: 2px;
+            background: #DC2626;
+            transition: width 1s cubic-bezier(.25, .46, .45, .94)
+        }
+        
+        .line-draw.visible {
+            width: 60px
+        }
+        
+        .counter {
+            font-variant-numeric: tabular-nums
+        }
+        /* DRAWERS & MODALS */
+        
+        .overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: rgba(0, 0, 0, .6);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .3s ease
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            pointer-events: all
+        }
+        
+        .drawer-right {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 210;
+            width: 100%;
+            max-width: 440px;
+            background: #111;
+            border-left: 1px solid rgba(255, 255, 255, .05);
+            transform: translateX(100%);
+            transition: transform .4s cubic-bezier(.25, .46, .45, .94);
+            display: flex;
+            flex-direction: column
+        }
+        
+        .drawer-right.active {
+            transform: translateX(0)
+        }
+        
+        .modal-center {
+            position: fixed;
+            inset: 0;
+            z-index: 210;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px
+        }
+        
+        .modal-center .modal-box {
+            background: #111;
+            border: 1px solid rgba(255, 255, 255, .05);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 460px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(.9) translateY(20px);
+            opacity: 0;
+            transition: all .4s cubic-bezier(.25, .46, .45, .94)
+        }
+        
+        .modal-center.active .modal-box {
+            transform: scale(1) translateY(0);
+            opacity: 1
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 12px 16px;
+            background: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 12px;
+            color: #E5E5E5;
+            font-size: 14px;
+            transition: all .3s ease;
+            outline: none
+        }
+        
+        .input-field:focus {
+            border-color: rgba(220, 38, 38, .4);
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, .08)
+        }
+        
+        .input-field::placeholder {
+            color: #404040
+        }
+        
+        .tab-btn {
+            padding: 10px 24px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+            transition: all .3s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+            background: transparent;
+            color: #737373
+        }
+        
+        .tab-btn.active {
+            background: rgba(220, 38, 38, .1);
+            color: #DC2626;
+            border-color: rgba(220, 38, 38, .2)
+        }
+        
+        .tab-btn:not(.active):hover {
+            color: #E5E5E5;
+            background: rgba(255, 255, 255, .03)
+        }
+        /* Confirmation */
+        
+        @keyframes checkDraw {
+            0% {
+                stroke-dashoffset: 48
+            }
+            100% {
+                stroke-dashoffset: 0
+            }
+        }
+        
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0)
+            }
+            60% {
+                transform: scale(1.15)
+            }
+            100% {
+                transform: scale(1)
+            }
+        }
+        
+        .confirm-check {
+            animation: scaleIn .5s cubic-bezier(.25, .46, .45, .94) .2s both
+        }
+        
+        .confirm-check circle {
+            animation: scaleIn .4s ease both
+        }
+        
+        .confirm-check path {
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: checkDraw .5s ease .5s forwards
+        }
+        
+        @media(max-width:768px) {
+            .cursor-dot,
+            .cursor-ring {
+                display: none !important
+            }
+            .drawer-right {
+                max-width: 100%
+            }
+        }
+    </style>
+</head>
+
+<body class="font-inter">
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- TOAST -->
+    <div id="toast" class="toast flex items-center gap-3">
+        <span class="iconify text-brand-red text-xl" data-icon="mdi:check-circle"></span>
+        <span id="toastMsg" class="text-sm text-brand-bone">Added to cart</span>
+    </div>
+
+    <!-- ========== OVERLAYS ========== -->
+    <div class="overlay" id="cartOverlay" onclick="closeCart()"></div>
+    <div class="overlay" id="authOverlay" onclick="closeAuth()"></div>
+    <div class="overlay" id="confirmOverlay" onclick="closeConfirm()"></div>
+
+    <!-- ========== CART DRAWER ========== -->
+    <div class="drawer-right" id="cartDrawer">
+        <div class="flex items-center justify-between px-6 py-5 border-b border-white/5">
+            <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                <span class="iconify text-brand-red" data-icon="mdi:shopping-outline"></span> Your Cart <span id="cartDrawerCount" class="text-sm text-brand-muted font-normal">(0)</span>
+            </h3>
+            <button onclick="closeCart()" class="w-10 h-10 rounded-lg flex items-center justify-center text-brand-muted hover:text-white hover:bg-white/5 transition-all">
+        <span class="iconify text-xl" data-icon="mdi:close"></span>
+      </button>
+        </div>
+        <div class="flex-1 overflow-y-auto px-6 py-4" id="cartItems">
+            <!-- Empty state -->
+            <div id="cartEmpty" class="flex flex-col items-center justify-center h-full text-center">
+                <span class="iconify text-5xl text-brand-faint mb-4" data-icon="mdi:cart-off"></span>
+                <p class="text-brand-muted text-sm">Your cart is empty</p>
+                <button onclick="closeCart()" class="mt-4 btn-outline px-6 py-2.5 rounded-lg text-xs font-semibold tracking-wider uppercase">Continue Shopping</button>
+            </div>
+            <!-- Filled state -->
+            <div id="cartFilled" class="space-y-4 hidden"></div>
+        </div>
+        <!-- Cart Footer -->
+        <div id="cartFooter" class="hidden border-t border-white/5 px-6 py-5 space-y-4">
+            <div class="flex items-center justify-between text-sm">
+                <span class="text-brand-muted">Subtotal</span>
+                <span id="cartSubtotal" class="font-bold text-white">0 DT</span>
+            </div>
+            <div class="flex items-center justify-between text-xs">
+                <span class="text-brand-faint flex items-center gap-1"><span class="iconify text-brand-red" data-icon="mdi:truck-delivery-outline"></span> Delivery</span>
+                <span class="text-green-500 font-semibold">FREE</span>
+            </div>
+            <div class="h-px bg-white/5"></div>
+            <div class="flex items-center justify-between">
+                <span class="text-base font-bold text-white">Total</span>
+                <span id="cartTotal" class="text-xl font-black text-brand-red">0 DT</span>
+            </div>
+            <button onclick="proceedToCheckout()" class="btn-primary w-full py-4 rounded-xl text-sm font-bold tracking-widest uppercase flex items-center justify-center gap-2">
+        <span class="iconify" data-icon="mdi:lock-outline"></span> Checkout
+      </button>
+            <p class="text-center text-[10px] tracking-widest uppercase text-brand-faint">Secure checkout via Shopify</p>
+        </div>
+    </div>
+
+    <!-- ========== AUTH MODAL ========== -->
+    <div class="modal-center" id="authModal" style="display:none">
+        <div class="modal-box p-8">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-2">
+                    <img src="logo.png" alt="STORY" class="h-7 object-contain logo-light-md">
+                </div>
+                <button onclick="closeAuth()" class="w-10 h-10 rounded-lg flex items-center justify-center text-brand-muted hover:text-white hover:bg-white/5 transition-all">
+          <span class="iconify text-xl" data-icon="mdi:close"></span>
+        </button>
+            </div>
+            <!-- Tabs -->
+            <div class="flex gap-2 mb-6 bg-brand-gray rounded-xl p-1">
+                <button onclick="switchAuthTab('login')" class="tab-btn active flex-1" id="tabLogin">Login</button>
+                <button onclick="switchAuthTab('register')" class="tab-btn flex-1" id="tabRegister">Create Account</button>
+            </div>
+            <!-- Login Form -->
+            <form id="loginForm" class="space-y-4" onsubmit="handleLogin(event)">
+                <div>
+                    <label class="block text-[10px] font-bold tracking-widest uppercase text-brand-faint mb-2">Email</label>
+                    <input type="email" required placeholder="your@email.com" class="input-field">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold tracking-widest uppercase text-brand-faint mb-2">Password</label>
+                    <div class="relative">
+                        <input type="password" required placeholder="••••••••" class="input-field pr-12" id="loginPass">
+                        <button type="button" onclick="togglePass('loginPass',this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-brand-faint hover:text-brand-muted transition-colors">
+              <span class="iconify text-lg" data-icon="mdi:eye-off-outline"></span>
+            </button>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" class="w-4 h-4 rounded border-brand-faint bg-brand-gray accent-brand-red">
+            <span class="text-xs text-brand-muted">Remember me</span>
+          </label>
+                    <a href="#" class="text-xs text-brand-red hover:text-brand-redLight transition-colors">Forgot password?</a>
+                </div>
+                <button type="submit" class="btn-primary w-full py-4 rounded-xl text-sm font-bold tracking-widest uppercase">Sign In</button>
+            </form>
+            <!-- Register Form -->
+            <form id="registerForm" class="space-y-4 hidden" onsubmit="handleRegister(event)">
+                <div>
+                    <label class="block text-[10px] font-bold tracking-widest uppercase text-brand-faint mb-2">Full Name</label>
+                    <input type="text" required placeholder="John Doe" class="input-field">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold tracking-widest uppercase text-brand-faint mb-2">Email</label>
+                    <input type="email" required placeholder="your@email.com" class="input-field">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold tracking-widest uppercase text-brand-faint mb-2">Phone</label>
+                    <input type="tel" required placeholder="+216 XX XXX XXX" class="input-field">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold tracking-widest uppercase text-brand-faint mb-2">Password</label>
+                    <div class="relative">
+                        <input type="password" required placeholder="Min 8 characters" minlength="8" class="input-field pr-12" id="regPass">
+                        <button type="button" onclick="togglePass('regPass',this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-brand-faint hover:text-brand-muted transition-colors">
+              <span class="iconify text-lg" data-icon="mdi:eye-off-outline"></span>
+            </button>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold tracking-widest uppercase text-brand-faint mb-2">Confirm Password</label>
+                    <input type="password" required placeholder="Repeat password" class="input-field" id="regPassConfirm">
+                </div>
+                <label class="flex items-start gap-2 cursor-pointer">
+          <input type="checkbox" required class="w-4 h-4 mt-0.5 rounded border-brand-faint bg-brand-gray accent-brand-red">
+          <span class="text-xs text-brand-muted">I agree to the <a href="#" class="text-brand-red hover:underline">Terms of Service</a> and <a href="#" class="text-brand-red hover:underline">Privacy Policy</a></span>
+        </label>
+                <button type="submit" class="btn-primary w-full py-4 rounded-xl text-sm font-bold tracking-widest uppercase">Create Account</button>
+            </form>
+            <div class="mt-6 text-center">
+                <p class="text-[10px] tracking-widest uppercase text-brand-faint">Or continue with</p>
+                <div class="flex gap-3 mt-3">
+                    <button class="flex-1 py-3 rounded-xl border border-white/5 bg-brand-gray text-sm text-brand-muted hover:text-white hover:border-white/10 transition-all flex items-center justify-center gap-2">
+            <span class="iconify text-lg" data-icon="mdi:google"></span> Google
+          </button>
+                    <button class="flex-1 py-3 rounded-xl border border-white/5 bg-brand-gray text-sm text-brand-muted hover:text-white hover:border-white/10 transition-all flex items-center justify-center gap-2">
+            <span class="iconify text-lg" data-icon="mdi:facebook"></span> Facebook
+          </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== CHECKOUT MODAL ========== -->
+    <div class="modal-center" id="checkoutModal" style="display:none">
+        <div class="modal-box p-8">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                    <span class="iconify text-brand-red" data-icon="mdi:lock-outline"></span> Checkout
+                </h3>
+                <button onclick="closeCheckout()" class="w-10 h-10 rounded-lg flex items-center justify-center text-brand-muted hover:text-white hover:bg-white/5 transition-all">
+          <span class="iconify text-xl" data-icon="mdi:close"></span>
+        </button>
+            </div>
+            <!-- Steps -->
+            <div class="flex items-center gap-2 mb-6">
+                <div class="flex items-center gap-2" id="step1Indicator">
+                    <div class="w-7 h-7 rounded-full bg-brand-red text-white text-xs font-bold flex items-center justify-center">1</div>
+                    <span class="text-xs font-semibold text-white hidden sm:inline">Shipping</span>
+                </div>
+                <div class="flex-1 h-px bg-brand-faint"></div>
+                <div class="flex items-center gap-2" id="step2Indicator">
+                    <div class="w-7 h-7 rounded-full border border-brand-faint text-brand-faint text-xs font-bold flex items-center justify-center" id="step2Circle">2</div>
+                    <span class="text-xs font-semibold text-brand-faint hidden sm:inline" id="step2Text">Payment</span>
+                </div>
+                <div class="flex-1 h-px bg-brand-faint"></div>
+                <div class="flex items-center gap-2" id="step3Indicator">
+                    <div class="w-7 h-7 rounded-full border border-brand-faint text-brand-faint text-xs font-bold flex items-center justify-center" id="step3Circle">3</div>
+                    <span class="text-xs font-semibold text-brand-faint hidden sm:inline" id="step3Text">Confirm</span>
+                </div>
+            </div>
+            <!-- Step 1: Shipping -->
+            <div id="checkoutStep1">
+                <form onsubmit="goToStep2(event)" class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-[10px] font-bold tracking-widest uppercase text-brand-faint mb-2">First Name</label>
+                            <input type="text" required placeholder="John" class="input-field" id="shipFirst">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold tracking-widest uppercase text-brand-faint mb-2">Last Name</label>
+                            <input type="text" required placeholder="Doe" class="input-field" id="shipLast">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold tracking-widest uppercase text-brand-faint mb-2">Phone</label>
+                        <input type="tel" required placeholder="+216 XX XXX XXX" class="input-field" id="shipPhone">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold tracking-widest uppercase text-brand-faint mb-2">Address</label>
+                        <input type="text" required placeholder="Street, building, apt..." class="input-field" id="shipAddress">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-[10px] font-bold tracking-widest uppercase text-brand-faint mb-2">City</label>
+                            <input type="text" required placeholder="Tunis" class="input-field" id="shipCity">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold tracking-widest uppercase text-brand-faint mb-2">Postal Code</label>
+                            <input type="text" required placeholder="1000" class="input-field" id="shipZip">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold tracking-widest uppercase text-brand-faint mb-2">Notes (optional)</label>
+                        <textarea rows="2" placeholder="Delivery instructions..." class="input-field resize-none" id="shipNotes"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary w-full py-4 rounded-xl text-sm font-bold tracking-widest uppercase flex items-center justify-center gap-2">
+            Continue to Payment <span class="iconify" data-icon="mdi:arrow-right"></span>
+          </button>
+                </form>
+            </div>
+            <!-- Step 2: Payment -->
+            <div id="checkoutStep2" class="hidden">
+                <form onsubmit="goToStep3(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-[10px] font-bold tracking-widest uppercase text-brand-faint mb-3">Payment Method</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-3 p-4 rounded-xl border border-white/5 bg-brand-gray cursor-pointer hover:border-brand-red/20 transition-colors">
+                <input type="radio" name="payment" value="cod" checked class="accent-brand-red w-4 h-4">
+                <span class="iconify text-xl text-green-500" data-icon="mdi:cash-multiple"></span>
+                <div>
+                  <span class="text-sm font-semibold text-white">Cash on Delivery</span>
+                  <p class="text-[10px] text-brand-faint">Pay when you receive</p>
+                </div>
+              </label>
+                            <label class="flex items-center gap-3 p-4 rounded-xl border border-white/5 bg-brand-gray cursor-pointer hover:border-brand-red/20 transition-colors">
+                <input type="radio" name="payment" value="card" class="accent-brand-red w-4 h-4">
+                <span class="iconify text-xl text-blue-400" data-icon="mdi:credit-card-outline"></span>
+                <div>
+                  <span class="text-sm font-semibold text-white">Credit Card</span>
+                  <p class="text-[10px] text-brand-faint">Powered by Shopify Payments</p>
+                </div>
+              </label>
+                            <label class="flex items-center gap-3 p-4 rounded-xl border border-white/5 bg-brand-gray cursor-pointer hover:border-brand-red/20 transition-colors">
+                <input type="radio" name="payment" value="transfer" class="accent-brand-red w-4 h-4">
+                <span class="iconify text-xl text-yellow-500" data-icon="mdi:bank-transfer"></span>
+                <div>
+                  <span class="text-sm font-semibold text-white">Bank Transfer</span>
+                  <p class="text-[10px] text-brand-faint">Send to our account</p>
+                </div>
+              </label>
+                        </div>
+                    </div>
+                    <!-- Order Summary -->
+                    <div class="p-4 rounded-xl border border-white/5 bg-brand-gray">
+                        <h4 class="text-[10px] font-bold tracking-widest uppercase text-brand-faint mb-3">Order Summary</h4>
+                        <div id="checkoutSummaryItems" class="space-y-2 text-sm"></div>
+                        <div class="mt-3 pt-3 border-t border-white/5 flex items-center justify-between">
+                            <span class="font-bold text-white">Total</span>
+                            <span id="checkoutSummaryTotal" class="font-black text-brand-red text-lg">0 DT</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <button type="button" onclick="goBackToStep1()" class="btn-ghost px-6 py-4 rounded-xl text-sm font-semibold tracking-wider uppercase border border-white/5">
+              <span class="iconify" data-icon="mdi:arrow-left"></span>
+            </button>
+                        <button type="submit" class="btn-primary flex-1 py-4 rounded-xl text-sm font-bold tracking-widest uppercase flex items-center justify-center gap-2">
+              Review Order <span class="iconify" data-icon="mdi:arrow-right"></span>
+            </button>
+                    </div>
+                </form>
+            </div>
+            <!-- Step 3: Confirm -->
+            <div id="checkoutStep3" class="hidden">
+                <div class="space-y-4">
+                    <div class="p-4 rounded-xl border border-white/5 bg-brand-gray">
+                        <h4 class="text-[10px] font-bold tracking-widest uppercase text-brand-red mb-3 flex items-center gap-1.5">
+                            <span class="iconify" data-icon="mdi:truck-delivery-outline"></span> Shipping To
+                        </h4>
+                        <p id="confirmAddress" class="text-sm text-brand-bone leading-relaxed"></p>
+                    </div>
+                    <div class="p-4 rounded-xl border border-white/5 bg-brand-gray">
+                        <h4 class="text-[10px] font-bold tracking-widest uppercase text-brand-red mb-3 flex items-center gap-1.5">
+                            <span class="iconify" data-icon="mdi:credit-card-outline"></span> Payment
+                        </h4>
+                        <p id="confirmPayment" class="text-sm text-brand-bone"></p>
+                    </div>
+                    <div class="p-4 rounded-xl border border-white/5 bg-brand-gray">
+                        <h4 class="text-[10px] font-bold tracking-widest uppercase text-brand-red mb-3">Items</h4>
+                        <div id="confirmItems" class="space-y-2 text-sm"></div>
+                        <div class="mt-3 pt-3 border-t border-white/5 flex items-center justify-between">
+                            <span class="font-bold text-white">Total</span>
+                            <span id="confirmTotal" class="font-black text-brand-red text-lg">0 DT</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-3">
+                        <button type="button" onclick="goBackToStep2()" class="btn-ghost px-6 py-4 rounded-xl text-sm font-semibold tracking-wider uppercase border border-white/5">
+              <span class="iconify" data-icon="mdi:arrow-left"></span>
+            </button>
+                        <button type="button" onclick="placeOrder()" id="placeOrderBtn" class="btn-primary flex-1 py-4 rounded-xl text-sm font-bold tracking-widest uppercase flex items-center justify-center gap-2">
+              <span class="iconify" data-icon="mdi:check"></span> Place Order
+            </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== ORDER CONFIRMATION MODAL ========== -->
+    <div class="modal-center" id="confirmModal" style="display:none">
+        <div class="modal-box p-10 text-center">
+            <div class="confirm-check inline-block mb-6">
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+          <circle cx="40" cy="40" r="36" stroke="#16a34a" stroke-width="3" fill="rgba(22,163,74,.1)"/>
+          <path d="M26 40l10 10 18-20" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+            </div>
+            <h2 class="text-2xl font-black text-white tracking-tight">Order Confirmed!</h2>
+            <p class="mt-2 text-sm text-brand-muted">Thank you for your purchase</p>
+            <div class="mt-6 p-4 rounded-xl border border-white/5 bg-brand-gray inline-block">
+                <span class="text-[10px] font-bold tracking-widest uppercase text-brand-faint block">Order Number</span>
+                <span id="orderNumber" class="text-xl font-black text-brand-red mt-1 block">STO-000000</span>
+            </div>
+            <p class="mt-4 text-xs text-brand-muted max-w-xs mx-auto leading-relaxed">
+                You'll receive a confirmation on your phone shortly. Your order will be delivered within 3-5 business days.
+            </p>
+            <div class="mt-8 flex flex-col gap-3">
+                <button onclick="closeConfirm();location.reload()" class="btn-primary w-full py-4 rounded-xl text-sm font-bold tracking-widest uppercase">Continue Shopping</button>
+                <button onclick="closeConfirm()" class="btn-ghost w-full py-3 rounded-xl text-xs font-semibold tracking-wider uppercase text-brand-muted">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== MOBILE MENU ========== -->
+    <div id="mobileMenu" class="mobile-menu flex flex-col items-center justify-center gap-8">
+        <button onclick="toggleMobile()" class="absolute top-6 right-6 text-brand-bone"><span class="iconify text-2xl" data-icon="mdi:close"></span></button>
+        <a href="#home" onclick="toggleMobile()" class="text-2xl font-semibold tracking-tight text-brand-bone hover:text-brand-red transition-colors">HOME</a>
+        <a href="#drop" onclick="toggleMobile()" class="text-2xl font-semibold tracking-tight text-brand-bone hover:text-brand-red transition-colors">DROP 01</a>
+        <a href="#about" onclick="toggleMobile()" class="text-2xl font-semibold tracking-tight text-brand-bone hover:text-brand-red transition-colors">ABOUT</a>
+        <div class="flex items-center gap-4 mt-4">
+            <button onclick="toggleMobile();openAuth('login')" class="text-sm text-brand-muted hover:text-brand-red transition-colors">Login</button>
+            <span class="text-brand-faint">|</span>
+            <button onclick="toggleMobile();openAuth('register')" class="text-sm text-brand-red hover:text-brand-redLight transition-colors">Create Account</button>
+        </div>
+    </div>
+
+    <!-- ========== NAV ========== -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50" style="background:rgba(10,10,10,.85);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.04);transform:translateY(-100%);transition:transform .6s cubic-bezier(.25,.46,.45,.94),background .3s ease">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#home" class="flex items-center gap-3 magnetic">
+                <img src="logo.png" alt="STORY" class="h-8 object-contain logo-light">
+                <img src="collab.png" alt="Collab" class="h-5 object-contain logo-light-sm">
+            </a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#home" class="nav-link text-xs font-medium tracking-widest uppercase text-brand-muted hover:text-brand-bone transition-colors magnetic">Home</a>
+                <a href="#drop" class="nav-link text-xs font-medium tracking-widest uppercase text-brand-muted hover:text-brand-bone transition-colors magnetic">Drop 01</a>
+                <a href="#about" class="nav-link text-xs font-medium tracking-widest uppercase text-brand-muted hover:text-brand-bone transition-colors magnetic">About</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="openAuth('login')" class="hidden md:flex items-center gap-1.5 text-xs font-medium tracking-widest uppercase text-brand-muted hover:text-brand-bone transition-colors magnetic">
+          <span class="iconify text-base" data-icon="mdi:account-outline"></span> Account
+        </button>
+                <button id="cartBtn" onclick="openCart()" class="relative text-brand-muted hover:text-brand-red transition-colors magnetic">
+          <span class="iconify text-xl" data-icon="mdi:shopping-outline"></span>
+          <span id="cartCount" class="absolute -top-2 -right-2 w-4 h-4 bg-brand-red text-white text-[10px] font-bold rounded-full flex items-center justify-center" style="transform:scale(0);transition:transform .3s cubic-bezier(.68,-.55,.27,1.55)">0</span>
+        </button>
+                <button onclick="toggleMobile()" class="md:hidden text-brand-muted hover:text-brand-bone transition-colors">
+          <span class="iconify text-xl" data-icon="mdi:menu"></span>
+        </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ANNOUNCEMENT BAR -->
+    <div class="fixed top-16 left-0 right-0 z-40 bg-brand-red overflow-hidden" style="transform:translateY(-100%);transition:transform .6s cubic-bezier(.25,.46,.45,.94) .3s" id="announceBar">
+        <div class="marquee-track animate-marquee">
+            <span class="whitespace-nowrap text-xs font-semibold tracking-[.2em] uppercase text-white px-8 py-2">DROP 01 — THE LAST MESS — 65 DT — FREE DELIVERY — LIMITED EDITION — HKEYA THE BRAND — DROP 01 — THE LAST MESS — 65 DT — FREE DELIVERY — LIMITED EDITION — HKEYA THE BRAND — DROP 01 — THE LAST MESS — 65 DT — FREE DELIVERY — LIMITED EDITION — HKEYA THE BRAND — </span>
+            <span class="whitespace-nowrap text-xs font-semibold tracking-[.2em] uppercase text-white px-8 py-2">DROP 01 — THE LAST MESS — 65 DT — FREE DELIVERY — LIMITED EDITION — HKEYA THE BRAND — DROP 01 — THE LAST MESS — 65 DT — FREE DELIVERY — LIMITED EDITION — HKEYA THE BRAND — DROP 01 — THE LAST MESS — 65 DT — FREE DELIVERY — LIMITED EDITION — HKEYA THE BRAND — </span>
+        </div>
+    </div>
+
+    <!-- ========== HERO ========== -->
+    <section id="home" class="hero-gradient min-h-screen flex items-center relative pt-28 pb-20 grid-bg overflow-hidden">
+        <canvas id="particleCanvas" class="absolute inset-0 pointer-events-none" style="opacity:.4"></canvas>
+        <div class="absolute top-32 left-10 w-1 h-32 bg-gradient-to-b from-brand-red/40 to-transparent" id="decoLine1" style="opacity:0;transition:opacity 1s ease 1.5s"></div>
+        <div class="absolute bottom-20 right-10 w-1 h-32 bg-gradient-to-t from-brand-red/40 to-transparent" id="decoLine2" style="opacity:0;transition:opacity 1s ease 1.8s"></div>
+        <div class="max-w-7xl mx-auto px-6 w-full relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <div class="order-2 lg:order-1">
+                    <div id="heroTag" style="opacity:0;transform:translateY(20px)">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="line-draw" id="heroLine"></div>
+                            <span class="text-[10px] font-bold tracking-[.3em] uppercase text-brand-red">First Drop — 2025</span>
+                        </div>
+                    </div>
+                    <h1 id="heroTitle" style="opacity:0">
+                        <span class="block text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tighter leading-[.9] text-white">THE</span>
+                        <span class="block text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tighter leading-[.9] text-brand-red mt-1">LAST</span>
+                        <span class="block text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tighter leading-[.9] text-white mt-1">MESS</span>
+                    </h1>
+                    <p id="heroDesc" style="opacity:0;transform:translateY(20px)" class="mt-8 text-base sm:text-lg text-brand-muted leading-relaxed max-w-md">Dark art meets streetwear. The first chapter of STORY — where skeletons guard the fence and nothing is what it seems.</p>
+                    <div id="heroBtns" style="opacity:0;transform:translateY(20px)" class="mt-8 flex flex-wrap items-center gap-4">
+                        <a href="#drop" class="btn-primary px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase inline-flex items-center gap-2 magnetic">Shop Now <span class="iconify text-base" data-icon="mdi:arrow-right"></span></a>
+                        <a href="#about" class="btn-outline px-8 py-4 rounded-lg text-sm font-semibold tracking-wider uppercase magnetic">Discover</a>
+                    </div>
+                    <div id="heroStats" style="opacity:0;transform:translateY(20px)" class="mt-10 flex items-center gap-8">
+                        <div><span class="block text-2xl font-bold text-white counter" data-target="65" data-suffix="DT">0DT</span><span class="text-[10px] tracking-widest uppercase text-brand-muted">Per Piece</span></div>
+                        <div class="w-px h-10 bg-brand-faint"></div>
+                        <div><span class="block text-2xl font-bold text-white flex items-center gap-1"><span class="iconify text-brand-red text-lg" data-icon="mdi:truck-delivery-outline"></span> FREE</span><span class="text-[10px] tracking-widest uppercase text-brand-muted">Delivery</span></div>
+                        <div class="w-px h-10 bg-brand-faint"></div>
+                        <div><span class="block text-2xl font-bold text-white">LTD</span><span class="text-[10px] tracking-widest uppercase text-brand-muted">Edition</span></div>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2" id="heroImage" style="opacity:0;transform:translateY(40px) scale(.95)">
+                    <div class="relative parallax-layer" data-speed="0.02">
+                        <div class="absolute -inset-4 bg-gradient-to-br from-brand-red/10 to-transparent rounded-3xl blur-2xl"></div>
+                        <div class="relative rounded-2xl overflow-hidden border border-white/5 animate-glow">
+                            <img src="https://z-cdn-media.chatglm.cn/files/ab92a8e6-7604-48fd-ba42-e073afccaa3e.png?auth_key=1883763330-e4f41eadf6e7412ab6a16dc4588e4647-0-efcf2901ff3197c4bd832630c26b7b62" alt="DROP 01 Artwork" class="w-full h-auto object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-brand-black to-transparent"></div>
+                            <div class="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+                                <span class="text-[10px] font-bold tracking-[.3em] uppercase text-brand-red/70">HKEYA THE BRAND</span>
+                                <span class="text-[10px] font-bold tracking-[.3em] uppercase text-white/40">2025</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== DROP 01 ========== -->
+    <section id="drop" class="py-24 lg:py-32 relative" style="background:linear-gradient(180deg,#0a0a0a 0%,#0f0f0f 50%,#0a0a0a 100%)">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <span class="text-[10px] font-bold tracking-[.3em] uppercase text-brand-red">001</span>
+                <h2 class="mt-3 text-4xl sm:text-5xl font-black tracking-tighter text-white">DROP 01</h2>
+                <p class="mt-4 text-brand-muted text-sm max-w-lg mx-auto">The Last Mess — one vision, printed on premium cotton with red detailing.</p>
+                <div class="flex justify-center mt-6">
+                    <div class="line-draw"></div>
+                </div>
+            </div>
+            <div class="max-w-4xl mx-auto">
+                <div class="product-card reveal-scale">
+                    <div class="product-border rounded-2xl border border-white/5 overflow-hidden bg-brand-gray transition-colors duration-500">
+                        <div class="grid md:grid-cols-2 gap-0">
+                            <div class="product-img-wrap aspect-[3/4] md:aspect-auto bg-brand-dark relative">
+                                <img src="front.png" alt="Front" class="img-front absolute inset-0 w-full h-full object-cover object-top">
+                                <img src="back.png" alt="Back" class="img-back w-full h-full object-cover object-top">
+                                <div class="absolute top-4 left-4 z-10"><span class="bg-brand-red text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded red-pulse">New</span></div>
+                                <div class="absolute bottom-4 left-4 z-10 transition-opacity duration-300" id="hoverHint">
+                                    <span class="bg-black/60 backdrop-blur-sm text-white/60 text-[10px] tracking-widest uppercase px-3 py-1.5 rounded border border-white/10 flex items-center gap-1.5">
+                    <span class="iconify text-xs" data-icon="mdi:cursor-default-click"></span> Hover to see back
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-8 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center gap-3 mb-4">
+                                        <img src="logo.png" alt="STORY" class="h-6 object-contain logo-light-md">
+                                        <img src="collab.png" alt="Collab" class="h-4 object-contain logo-light-sm">
+                                    </div>
+                                    <h3 class="text-2xl font-black text-white tracking-tight">THE LAST MESS TEE</h3>
+                                    <p class="text-xs text-brand-muted mt-2 tracking-wide leading-relaxed">Front: "The Last Mess" typography with skeleton fence graphic. Back: Full skeleton scene around red fence. Red-trimmed collar & hem.</p>
+                                    <div class="mt-6 flex items-center gap-2 stagger-children" id="sizeGroup">
+                                        <span class="text-[10px] tracking-widest uppercase text-brand-faint mr-1">Size</span>
+                                        <button onclick="selectSize(this)" class="size-btn w-10 h-10 rounded-lg border border-brand-faint text-xs font-semibold text-brand-muted flex items-center justify-center">S</button>
+                                        <button onclick="selectSize(this)" class="size-btn w-10 h-10 rounded-lg border border-brand-faint text-xs font-semibold text-brand-muted flex items-center justify-center active">M</button>
+                                        <button onclick="selectSize(this)" class="size-btn w-10 h-10 rounded-lg border border-brand-faint text-xs font-semibold text-brand-muted flex items-center justify-center">L</button>
+                                        <button onclick="selectSize(this)" class="size-btn w-10 h-10 rounded-lg border border-brand-faint text-xs font-semibold text-brand-muted flex items-center justify-center">XL</button>
+                                    </div>
+                                    <div class="mt-6 flex items-center gap-4 text-[10px] tracking-widest uppercase text-brand-faint">
+                                        <span class="flex items-center gap-1.5"><span class="iconify text-brand-red text-sm" data-icon="mdi:truck-delivery-outline"></span> Free Delivery</span>
+                                        <span class="flex items-center gap-1.5"><span class="iconify text-sm" data-icon="mdi:check-circle-outline"></span> In Stock</span>
+                                    </div>
+                                </div>
+                                <div class="mt-8 pt-6 border-t border-white/5">
+                                    <div class="flex items-center justify-between gap-4 flex-wrap">
+                                        <div>
+                                            <span class="block text-3xl font-black text-brand-red counter" data-target="65" data-suffix=" DT">0 DT</span>
+                                            <span class="text-[10px] tracking-widest uppercase text-brand-faint">Free shipping included</span>
+                                        </div>
+                                        <button onclick="addToCart()" class="btn-primary px-8 py-4 rounded-xl text-xs font-bold tracking-widest uppercase flex items-center gap-2 shrink-0 magnetic" id="addToCartBtn">
+                      <span class="iconify text-base" data-icon="mdi:cart-plus"></span> Add to Cart
+                    </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-6 stagger-children" id="detailGrid">
+                <div class="p-6 rounded-xl border border-white/5 bg-brand-gray/50 text-center hover:border-brand-red/20 transition-colors duration-300"><span class="iconify text-3xl text-brand-red mx-auto" data-icon="mdi:tshirt-crew-outline"></span>
+                    <h4 class="mt-3 text-sm font-semibold text-white">Premium Cotton</h4>
+                    <p class="mt-1 text-xs text-brand-muted">220gsm heavyweight tee</p>
+                </div>
+                <div class="p-6 rounded-xl border border-white/5 bg-brand-gray/50 text-center hover:border-brand-red/20 transition-colors duration-300"><span class="iconify text-3xl text-brand-red mx-auto" data-icon="mdi:palette-outline"></span>
+                    <h4 class="mt-3 text-sm font-semibold text-white">Screen Printed</h4>
+                    <p class="mt-1 text-xs text-brand-muted">High-density red & white ink</p>
+                </div>
+                <div class="p-6 rounded-xl border border-white/5 bg-brand-gray/50 text-center hover:border-brand-red/20 transition-colors duration-300"><span class="iconify text-3xl text-brand-red mx-auto" data-icon="mdi:ruler"></span>
+                    <h4 class="mt-3 text-sm font-semibold text-white">Oversized Fit</h4>
+                    <p class="mt-1 text-xs text-brand-muted">Drop shoulder, boxy silhouette</p>
+                </div>
+                <div class="p-6 rounded-xl border border-white/5 bg-brand-gray/50 text-center hover:border-brand-red/20 transition-colors duration-300"><span class="iconify text-3xl text-brand-red mx-auto" data-icon="mdi:truck-check-outline"></span>
+                    <h4 class="mt-3 text-sm font-semibold text-white">Free Shipping</h4>
+                    <p class="mt-1 text-xs text-brand-muted">Delivered to your door</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SIZE CHART -->
+    <section class="py-20 border-y border-white/5">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-12 reveal"><span class="text-[10px] font-bold tracking-[.3em] uppercase text-brand-red">Guide</span>
+                <h2 class="mt-3 text-3xl font-black tracking-tighter text-white">SIZE CHART</h2>
+                <p class="mt-2 text-xs text-brand-muted">Oversized fit — we recommend your usual size</p>
+            </div>
+            <div class="reveal overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="border-b border-white/10">
+                            <th class="text-left py-4 px-4 text-[10px] font-bold tracking-widest uppercase text-brand-red">Size</th>
+                            <th class="text-center py-4 px-4 text-[10px] font-bold tracking-widest uppercase text-brand-faint">Chest (cm)</th>
+                            <th class="text-center py-4 px-4 text-[10px] font-bold tracking-widest uppercase text-brand-faint">Length (cm)</th>
+                            <th class="text-center py-4 px-4 text-[10px] font-bold tracking-widest uppercase text-brand-faint">Shoulder (cm)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-white/5 hover:bg-white/[.02] transition-colors">
+                            <td class="py-4 px-4 font-semibold text-white">S</td>
+                            <td class="py-4 px-4 text-center text-brand-muted">54</td>
+                            <td class="py-4 px-4 text-center text-brand-muted">71</td>
+                            <td class="py-4 px-4 text-center text-brand-muted">58</td>
+                        </tr>
+                        <tr class="border-b border-white/5 hover:bg-white/[.02] transition-colors">
+                            <td class="py-4 px-4 font-semibold text-white">M</td>
+                            <td class="py-4 px-4 text-center text-brand-muted">57</td>
+                            <td class="py-4 px-4 text-center text-brand-muted">74</td>
+                            <td class="py-4 px-4 text-center text-brand-muted">61</td>
+                        </tr>
+                        <tr class="border-b border-white/5 hover:bg-white/[.02] transition-colors">
+                            <td class="py-4 px-4 font-semibold text-white">L</td>
+                            <td class="py-4 px-4 text-center text-brand-muted">60</td>
+                            <td class="py-4 px-4 text-center text-brand-muted">77</td>
+                            <td class="py-4 px-4 text-center text-brand-muted">64</td>
+                        </tr>
+                        <tr class="hover:bg-white/[.02] transition-colors">
+                            <td class="py-4 px-4 font-semibold text-white">XL</td>
+                            <td class="py-4 px-4 text-center text-brand-muted">63</td>
+                            <td class="py-4 px-4 text-center text-brand-muted">80</td>
+                            <td class="py-4 px-4 text-center text-brand-muted">67</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="py-24 lg:py-32 relative" style="background:linear-gradient(180deg,#0a0a0a 0%,#111111 50%,#0a0a0a 100%)">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal-left flex justify-center">
+                    <div class="relative">
+                        <div class="absolute -inset-8 bg-brand-red/5 rounded-full blur-3xl"></div><img src="logo.png" alt="STORY Logo" class="relative w-full max-w-md animate-float"></div>
+                </div>
+                <div class="reveal-right">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="line-draw"></div><span class="text-[10px] font-bold tracking-[.3em] uppercase text-brand-red">Who We Are</span></div>
+                    <h2 class="text-4xl sm:text-5xl font-black tracking-tighter text-white leading-tight">HKEYA<br>THE BRAND</h2>
+                    <p class="mt-6 text-brand-muted leading-relaxed">STORY is not just a label — it's a narrative woven into fabric. Born from the underground, each drop tells a chapter. Dark art, raw aesthetics, and unapologetic design define every piece we create.</p>
+                    <p class="mt-4 text-brand-muted leading-relaxed">Our first chapter, <span class="text-brand-red font-semibold">"The Last Mess"</span>, is a visual rebellion. Skeletons guarding a red fence — a metaphor for the boundary between chaos and order, life and what comes after.</p>
+                    <div class="mt-8 grid grid-cols-3 gap-6 stagger-children" id="aboutStats">
+                        <div><span class="block text-3xl font-black text-white counter" data-target="1" data-suffix="">0</span><span class="text-[10px] tracking-widest uppercase text-brand-faint">First Drop</span></div>
+                        <div><span class="block text-3xl font-black text-brand-red">∞</span><span class="text-[10px] tracking-widest uppercase text-brand-faint">Stories to Tell</span></div>
+                        <div><span class="block text-3xl font-black text-white counter" data-target="100" data-suffix="%">0%</span><span class="text-[10px] tracking-widest uppercase text-brand-faint">Authentic</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 py-16" style="background:#080808">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 reveal">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-3">
+                        <img src="logo.png" alt="STORY" class="h-10 object-contain logo-light">
+                        <img src="collab.png" alt="Collab" class="h-6 object-contain logo-light-sm">
+                    </div>
+                    <p class="mt-4 text-sm text-brand-muted max-w-sm leading-relaxed">HKEYA THE BRAND — Every drop is a new chapter. Dark art, street culture, authentic storytelling.</p>
+                    <div class="mt-6 flex items-center gap-3">
+                        <a href="#" class="w-10 h-10 rounded-lg border border-white/5 flex items-center justify-center text-brand-muted hover:text-brand-red hover:border-brand-red/30 transition-all duration-300 magnetic"><span class="iconify text-lg" data-icon="mdi:instagram"></span></a>
+                        <a href="#" class="w-10 h-10 rounded-lg border border-white/5 flex items-center justify-center text-brand-muted hover:text-brand-red hover:border-brand-red/30 transition-all duration-300 magnetic"><span class="iconify text-lg" data-icon="mdi:facebook"></span></a>
+                        <a href="#" class="w-10 h-10 rounded-lg border border-white/5 flex items-center justify-center text-brand-muted hover:text-brand-red hover:border-brand-red/30 transition-all duration-300 magnetic"><span class="iconify text-lg" data-icon="mdi:whatsapp"></span></a>
+                        <a href="#" class="w-10 h-10 rounded-lg border border-white/5 flex items-center justify-center text-brand-muted hover:text-brand-red hover:border-brand-red/30 transition-all duration-300 magnetic"><span class="iconify text-lg" data-icon="simple-icons:tiktok"></span></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-[10px] font-bold tracking-[.3em] uppercase text-brand-red mb-4">Navigate</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-sm text-brand-muted hover:text-brand-bone transition-colors">Home</a></li>
+                        <li><a href="#drop" class="text-sm text-brand-muted hover:text-brand-bone transition-colors">Drop 01</a></li>
+                        <li><a href="#about" class="text-sm text-brand-muted hover:text-brand-bone transition-colors">About</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-[10px] font-bold tracking-[.3em] uppercase text-brand-red mb-4">Account</h4>
+                    <ul class="space-y-3">
+                        <li><button onclick="openAuth('login')" class="text-sm text-brand-muted hover:text-brand-bone transition-colors">Login</button></li>
+                        <li><button onclick="openAuth('register')" class="text-sm text-brand-muted hover:text-brand-bone transition-colors">Create Account</button></li>
+                        <li><button onclick="openCart()" class="text-sm text-brand-muted hover:text-brand-bone transition-colors">Cart</button></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-16 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-[10px] tracking-widest uppercase text-brand-faint">© 2025 STORY — HKEYA THE BRAND. All rights reserved.</p>
+                <p class="text-[10px] tracking-widest uppercase text-brand-faint">DROP 01 — THE LAST MESS</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== JAVASCRIPT ========== -->
+    <script>
+        // ===== STATE =====
+        let cart = [];
+        let currentUser = null;
+        const PRICE = 65;
+
+        // ===== CUSTOM CURSOR =====
+        const dot = document.getElementById('cursorDot');
+        const ring = document.getElementById('cursorRing');
+        let mouseX = 0,
+            mouseY = 0,
+            ringX = 0,
+            ringY = 0;
+        document.addEventListener('mousemove', e => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            dot.style.left = mouseX - 4 + 'px';
+            dot.style.top = mouseY - 4 + 'px';
+        });
+
+        function animateRing() {
+            ringX += (mouseX - ringX) * .15;
+            ringY += (mouseY - ringY) * .15;
+            ring.style.left = ringX - 18 + 'px';
+            ring.style.top = ringY - 18 + 'px';
+            requestAnimationFrame(animateRing);
+        }
+        animateRing();
+        document.querySelectorAll('a, button, .magnetic').forEach(el => {
+            el.addEventListener('mouseenter', () => ring.classList.add('hover'));
+            el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+        });
+
+        // ===== MAGNETIC BUTTONS =====
+        document.querySelectorAll('.magnetic').forEach(el => {
+            el.addEventListener('mousemove', e => {
+                const r = el.getBoundingClientRect();
+                el.style.transform = `translate(${(e.clientX-r.left-r.width/2)*.2}px,${(e.clientY-r.top-r.height/2)*.2}px)`;
+            });
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = 'translate(0,0)';
+            });
+        });
+
+        // ===== HERO ENTRANCE =====
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('navbar').style.transform = 'translateY(0)';
+                document.getElementById('announceBar').style.transform = 'translateY(0)';
+            }, 200);
+            setTimeout(() => {
+                const t = document.getElementById('heroTag');
+                t.style.transition = 'all .8s cubic-bezier(.25,.46,.45,.94)';
+                t.style.opacity = '1';
+                t.style.transform = 'translateY(0)';
+            }, 600);
+            setTimeout(() => document.getElementById('heroLine').classList.add('visible'), 900);
+            setTimeout(() => {
+                const title = document.getElementById('heroTitle');
+                title.style.opacity = '1';
+                title.querySelectorAll('span').forEach((s, i) => {
+                    s.style.opacity = '0';
+                    s.style.transform = 'translateY(60px)';
+                    s.style.transition = `all .7s cubic-bezier(.25,.46,.45,.94) ${i*.12}s`;
+                    setTimeout(() => {
+                        s.style.opacity = '1';
+                        s.style.transform = 'translateY(0)';
+                    }, 50);
+                });
+            }, 800);
+            setTimeout(() => {
+                const d = document.getElementById('heroDesc');
+                d.style.transition = 'all .8s ease';
+                d.style.opacity = '1';
+                d.style.transform = 'translateY(0)';
+            }, 1400);
+            setTimeout(() => {
+                const b = document.getElementById('heroBtns');
+                b.style.transition = 'all .8s ease';
+                b.style.opacity = '1';
+                b.style.transform = 'translateY(0)';
+            }, 1600);
+            setTimeout(() => {
+                const s = document.getElementById('heroStats');
+                s.style.transition = 'all .8s ease';
+                s.style.opacity = '1';
+                s.style.transform = 'translateY(0)';
+                s.querySelectorAll('.counter').forEach(c => animateCounter(c));
+            }, 1800);
+            setTimeout(() => {
+                const i = document.getElementById('heroImage');
+                i.style.transition = 'all 1s ease';
+                i.style.opacity = '1';
+                i.style.transform = 'translateY(0) scale(1)';
+            }, 1000);
+            setTimeout(() => document.getElementById('decoLine1').style.opacity = '1', 2000);
+            setTimeout(() => document.getElementById('decoLine2').style.opacity = '1', 2200);
+        });
+
+        // ===== COUNTER =====
+        function animateCounter(el) {
+            const target = parseInt(el.dataset.target),
+                suffix = el.dataset.suffix || '',
+                start = performance.now();
+
+            function update(now) {
+                const p = Math.min((now - start) / 1500, 1),
+                    e = 1 - Math.pow(1 - p, 3);
+                el.textContent = Math.round(e * target) + suffix;
+                if (p < 1) requestAnimationFrame(update);
+            }
+            requestAnimationFrame(update);
+        }
+
+        // ===== SCROLL REVEAL =====
+        const revObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    e.target.querySelectorAll('.counter').forEach(c => {
+                        if (!c.dataset.animated) {
+                            c.dataset.animated = '1';
+                            animateCounter(c);
+                        }
+                    });
+                    e.target.querySelectorAll('.line-draw').forEach(l => l.classList.add('visible'));
+                }
+            });
+        }, {
+            threshold: .1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+        document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale,.stagger-children').forEach(el => revObs.observe(el));
+
+        // ===== PARALLAX =====
+        document.addEventListener('mousemove', e => {
+            const dx = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2),
+                dy = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+            document.querySelectorAll('.parallax-layer').forEach(l => {
+                const s = parseFloat(l.dataset.speed) || .02;
+                l.style.transform = `translate(${dx*s*100}px,${dy*s*100}px)`;
+            });
+        });
+
+        // ===== PARTICLES =====
+        const canvas = document.getElementById('particleCanvas'),
+            ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = canvas.parentElement.offsetWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + .5;
+                this.speedX = (Math.random() - .5) * .5;
+                this.speedY = (Math.random() - .5) * .5;
+                this.opacity = Math.random() * .5 + .1;
+                this.isRed = Math.random() > .7;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.isRed ? `rgba(220,38,38,${this.opacity})` : `rgba(229,229,229,${this.opacity*.5})`;
+                ctx.fill();
+            }
+        }
+        for (let i = 0; i < 60; i++) particles.push(new Particle());
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x,
+                        dy = particles[i].y - particles[j].y,
+                        d = Math.sqrt(dx * dx + dy * dy);
+                    if (d < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(220,38,38,${.06*(1-d/120)})`;
+                        ctx.lineWidth = .5;
+                        ctx.stroke();
+                    }
+                }
+            }
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // ===== HOVER HINT =====
+        const imgWrap = document.querySelector('.product-img-wrap'),
+            hint = document.getElementById('hoverHint');
+        if (imgWrap && hint) {
+            imgWrap.addEventListener('mouseenter', () => hint.style.opacity = '0');
+            imgWrap.addEventListener('mouseleave', () => hint.style.opacity = '1');
+        }
+
+        // ===== CART LOGIC =====
+        function getSelectedSize() {
+            const active = document.querySelector('#sizeGroup .size-btn.active');
+            return active ? active.textContent : 'M';
+        }
+
+        function addToCart() {
+            const size = getSelectedSize();
+            const existing = cart.find(i => i.size === size);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({
+                    name: 'THE LAST MESS TEE',
+                    size,
+                    price: PRICE,
+                    qty: 1,
+                    img: 'front.png'
+                });
+            }
+            updateCartUI();
+            showToast(`Size ${size} added to cart`);
+            const btn = document.getElementById('addToCartBtn');
+            btn.innerHTML = '<span class="iconify text-base" data-icon="mdi:check"></span> Added!';
+            btn.style.background = '#16a34a';
+            setTimeout(() => {
+                btn.innerHTML = '<span class="iconify text-base" data-icon="mdi:cart-plus"></span> Add to Cart';
+                btn.style.background = '#DC2626';
+            }, 1500);
+        }
+
+        // ===== REMOVE / UPDATE QTY =====
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+            renderCartItems();
+        }
+
+        function updateQty(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) cart.splice(index, 1);
+            updateCartUI();
+            renderCartItems();
+        }
+
+        function updateCartUI() {
+            const total = cart.reduce((s, i) => s + i.qty, 0);
+            const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+            const countEl = document.getElementById('cartCount');
+            countEl.textContent = total;
+            countEl.style.transform = total > 0 ? 'scale(1)' : 'scale(0)';
+            document.getElementById('cartDrawerCount').textContent = `(${total})`;
+            document.getElementById('cartSubtotal').textContent = subtotal + ' DT';
+            document.getElementById('cartTotal').textContent = subtotal + ' DT';
+            document.getElementById('cartEmpty').classList.toggle('hidden', total > 0);
+            document.getElementById('cartFilled').classList.toggle('hidden', total === 0);
+            document.getElementById('cartFooter').classList.toggle('hidden', total === 0);
+            renderCartItems();
+        }
+
+        function renderCartItems() {
+            const container = document.getElementById('cartFilled');
+            container.innerHTML = cart.map((item, i) => `
+        <div class="flex gap-4 p-4 rounded-xl border border-white/5 bg-brand-gray/50" style="animation:fadeInUp .4s ease ${i*.05}s both">
+          <div class="w-20 h-24 rounded-lg overflow-hidden bg-brand-dark flex-shrink-0">
+            <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover object-top">
+          </div>
+          <div class="flex-1 min-w-0">
+            <h4 class="text-sm font-bold text-white truncate">${item.name}</h4>
+            <p class="text-xs text-brand-muted mt-0.5">Size: ${item.size}</p>
+            <div class="flex items-center justify-between mt-3">
+              <div class="flex items-center gap-2">
+                <button onclick="updateQty(${i},-1)" class="w-7 h-7 rounded-md border border-white/10 flex items-center justify-center text-brand-muted hover:text-white hover:border-white/20 transition-all text-xs">−</button>
+                <span class="text-sm font-semibold text-white w-5 text-center">${item.qty}</span>
+                <button onclick="updateQty(${i},1)" class="w-7 h-7 rounded-md border border-white/10 flex items-center justify-center text-brand-muted hover:text-white hover:border-white/20 transition-all text-xs">+</button>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="text-sm font-bold text-brand-red">${item.price * item.qty} DT</span>
+                <button onclick="removeFromCart(${i})" class="text-brand-faint hover:text-red-500 transition-colors"><span class="iconify text-base" data-icon="mdi:delete-outline"></span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+        }
+
+        function openCart() {
+            document.getElementById('cartOverlay').classList.add('active');
+            document.getElementById('cartDrawer').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // ===== MODAL CLOSES =====
+        function closeCart() {
+            document.getElementById('cartOverlay').classList.remove('active');
+            document.getElementById('cartDrawer').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function openAuth(tab) {
+            document.getElementById('authOverlay').classList.add('active');
+            document.getElementById('authModal').style.display = 'flex';
+            setTimeout(() => document.getElementById('authModal').classList.add('active'), 10);
+            switchAuthTab(tab || 'login');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAuth() {
+            document.getElementById('authOverlay').classList.remove('active');
+            document.getElementById('authModal').classList.remove('active');
+            setTimeout(() => document.getElementById('authModal').style.display = 'none', 400);
+            document.body.style.overflow = '';
+        }
+
+        function switchAuthTab(tab) {
+            document.getElementById('tabLogin').classList.toggle('active', tab === 'login');
+            document.getElementById('tabRegister').classList.toggle('active', tab === 'register');
+            document.getElementById('loginForm').classList.toggle('hidden', tab !== 'login');
+            document.getElementById('registerForm').classList.toggle('hidden', tab !== 'register');
+        }
+
+        function togglePass(id, btn) {
+            const input = document.getElementById(id);
+            const isPass = input.type === 'password';
+            input.type = isPass ? 'text' : 'password';
+            btn.querySelector('.iconify').setAttribute('data-icon', isPass ? 'mdi:eye-outline' : 'mdi:eye-off-outline');
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = e.target.querySelector('input[type="email"]').value;
+            currentUser = {
+                email
+            };
+            closeAuth();
+            showToast('Welcome back! You are now logged in.');
+            updateAccountUI();
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            const pass = document.getElementById('regPass').value;
+            const confirm = document.getElementById('regPassConfirm').value;
+            if (pass !== confirm) {
+                showToast('Passwords do not match');
+                return;
+            }
+            const name = e.target.querySelector('input[type="text"]').value;
+            const email = e.target.querySelector('input[type="email"]').value;
+            currentUser = {
+                name,
+                email
+            };
+            closeAuth();
+            showToast(`Account created! Welcome, ${name}.`);
+            updateAccountUI();
+        }
+
+        function updateAccountUI() {
+            const btn = document.querySelector('[onclick="openAuth(\'login\')"]');
+            if (currentUser && btn) {
+                btn.innerHTML = `<span class="iconify text-base text-green-500" data-icon="mdi:account-check"></span> ${currentUser.name || currentUser.email.split('@')[0]}`;
+                btn.onclick = () => {
+                    currentUser = null;
+                    updateAccountUI();
+                    showToast('Logged out');
+                };
+            } else if (btn) {
+                btn.innerHTML = '<span class="iconify text-base" data-icon="mdi:account-outline"></span> Account';
+                btn.onclick = () => openAuth('login');
+            }
+        }
+
+        // ===== CHECKOUT LOGIC =====
+        function proceedToCheckout() {
+            if (!currentUser) {
+                closeCart();
+                openAuth('login');
+                showToast('Please login or create an account first');
+                return;
+            }
+            closeCart();
+            setTimeout(() => openCheckout(), 300);
+        }
+
+        function openCheckout() {
+            document.getElementById('confirmOverlay').classList.add('active');
+            document.getElementById('checkoutModal').style.display = 'flex';
+            setTimeout(() => document.getElementById('checkoutModal').classList.add('active'), 10);
+            goToStep1();
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCheckout() {
+            document.getElementById('confirmOverlay').classList.remove('active');
+            document.getElementById('checkoutModal').classList.remove('active');
+            setTimeout(() => document.getElementById('checkoutModal').style.display = 'none', 400);
+            document.body.style.overflow = '';
+        }
+
+        function goToStep1() {
+            document.getElementById('checkoutStep1').classList.remove('hidden');
+            document.getElementById('checkoutStep2').classList.add('hidden');
+            document.getElementById('checkoutStep3').classList.add('hidden');
+            document.getElementById('step2Circle').className = 'w-7 h-7 rounded-full border border-brand-faint text-brand-faint text-xs font-bold flex items-center justify-center';
+            document.getElementById('step2Text').className = 'text-xs font-semibold text-brand-faint hidden sm:inline';
+            document.getElementById('step3Circle').className = 'w-7 h-7 rounded-full border border-brand-faint text-brand-faint text-xs font-bold flex items-center justify-center';
+            document.getElementById('step3Text').className = 'text-xs font-semibold text-brand-faint hidden sm:inline';
+        }
+
+        function goToStep2(e) {
+            if (e) e.preventDefault();
+            document.getElementById('checkoutStep1').classList.add('hidden');
+            document.getElementById('checkoutStep2').classList.remove('hidden');
+            document.getElementById('step2Circle').className = 'w-7 h-7 rounded-full bg-brand-red text-white text-xs font-bold flex items-center justify-center';
+            document.getElementById('step2Text').className = 'text-xs font-semibold text-white hidden sm:inline';
+            // Fill summary
+            const itemsEl = document.getElementById('checkoutSummaryItems');
+            itemsEl.innerHTML = cart.map(i => `<div class="flex justify-between"><span class="text-brand-muted">${i.name} (${i.size}) × ${i.qty}</span><span class="text-white font-semibold">${i.price*i.qty} DT</span></div>`).join('');
+            document.getElementById('checkoutSummaryTotal').textContent = cart.reduce((s, i) => s + i.price * i.qty, 0) + ' DT';
+        }
+
+        function goBackToStep1() {
+            document.getElementById('checkoutStep2').classList.add('hidden');
+            document.getElementById('checkoutStep1').classList.remove('hidden');
+            document.getElementById('step2Circle').className = 'w-7 h-7 rounded-full border border-brand-faint text-brand-faint text-xs font-bold flex items-center justify-center';
+            document.getElementById('step2Text').className = 'text-xs font-semibold text-brand-faint hidden sm:inline';
+        }
+
+        function goToStep3(e) {
+            if (e) e.preventDefault();
+            document.getElementById('checkoutStep2').classList.add('hidden');
+            document.getElementById('checkoutStep3').classList.remove('hidden');
+            document.getElementById('step3Circle').className = 'w-7 h-7 rounded-full bg-brand-red text-white text-xs font-bold flex items-center justify-center';
+            document.getElementById('step3Text').className = 'text-xs font-semibold text-white hidden sm:inline';
+            // Fill confirm
+            const f = document.getElementById('shipFirst').value,
+                l = document.getElementById('shipLast').value,
+                p = document.getElementById('shipPhone').value,
+                a = document.getElementById('shipAddress').value,
+                c = document.getElementById('shipCity').value,
+                z = document.getElementById('shipZip').value;
+            document.getElementById('confirmAddress').innerHTML = `<strong>${f} ${l}</strong><br>${a}<br>${c} ${z}<br>${p}`;
+            const payment = document.querySelector('input[name="payment"]:checked');
+            const paymentLabels = {
+                cod: '💰 Cash on Delivery',
+                card: '💳 Credit Card (Shopify Payments)',
+                transfer: '🏦 Bank Transfer'
+            };
+            document.getElementById('confirmPayment').textContent = paymentLabels[payment.value];
+            document.getElementById('confirmItems').innerHTML = cart.map(i => `<div class="flex justify-between"><span class="text-brand-muted">${i.name} (${i.size}) × ${i.qty}</span><span class="text-white font-semibold">${i.price*i.qty} DT</span></div>`).join('');
+            document.getElementById('confirmTotal').textContent = cart.reduce((s, i) => s + i.price * i.qty, 0) + ' DT';
+        }
+
+        function goBackToStep2() {
+            document.getElementById('checkoutStep3').classList.add('hidden');
+            document.getElementById('checkoutStep2').classList.remove('hidden');
+            document.getElementById('step3Circle').className = 'w-7 h-7 rounded-full border border-brand-faint text-brand-faint text-xs font-bold flex items-center justify-center';
+            document.getElementById('step3Text').className = 'text-xs font-semibold text-brand-faint hidden sm:inline';
+        }
+
+        function placeOrder() {
+            const btn = document.getElementById('placeOrderBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="iconify animate-spin" data-icon="mdi:loading"></span> Processing...';
+            setTimeout(() => {
+                closeCheckout();
+                // Generate order number
+                const num = 'STO-' + String(Math.floor(100000 + Math.random() * 900000));
+                document.getElementById('orderNumber').textContent = num;
+                // Show confirmation
+                document.getElementById('confirmOverlay').classList.add('active');
+                document.getElementById('confirmModal').style.display = 'flex';
+                setTimeout(() => document.getElementById('confirmModal').classList.add('active'), 10);
+                // Reset
+                cart = [];
+                updateCartUI();
+                btn.disabled = false;
+                btn.innerHTML = '<span class="iconify" data-icon="mdi:check"></span> Place Order';
+                document.body.style.overflow = 'hidden';
+            }, 2000);
+        }
+
+        function closeConfirm() {
+            document.getElementById('confirmOverlay').classList.remove('active');
+            document.getElementById('confirmModal').classList.remove('active');
+            setTimeout(() => document.getElementById('confirmModal').style.display = 'none', 400);
+            document.body.style.overflow = '';
+        }
+
+        // ===== SIZE SELECT =====
+        function selectSize(btn) {
+            btn.parentElement.querySelectorAll('.size-btn').forEach(s => s.classList.remove('active'));
+            btn.classList.add('active');
+            btn.style.transform = 'scale(1.15)';
+            setTimeout(() => btn.style.transform = 'scale(1)', 150);
+        }
+
+        // ===== MOBILE MENU =====
+        function toggleMobile() {
+            document.getElementById('mobileMenu').classList.toggle('open');
+        }
+
+        // ===== TOAST =====
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 2500);
+        }
+
+        // ===== NAV SCROLL =====
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar'),
+                scroll = window.scrollY;
+            nav.style.background = scroll > 50 ? 'rgba(10,10,10,.95)' : 'rgba(10,10,10,.85)';
+            if (scroll > lastScroll && scroll > 200) {
+                nav.style.transform = 'translateY(-100%)';
+                document.getElementById('announceBar').style.transform = 'translateY(-100%)';
+            } else {
+                nav.style.transform = 'translateY(0)';
+                document.getElementById('announceBar').style.transform = 'translateY(0)';
+            }
+            lastScroll = scroll;
+        });
+
+        // ===== SMOOTH SCROLL =====
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const t = document.querySelector(a.getAttribute('href'));
+                if (t) window.scrollTo({
+                    top: t.getBoundingClientRect().top + window.scrollY - 120,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // ===== ESCAPE KEY =====
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                closeCart();
+                closeAuth();
+                closeCheckout();
+                closeConfirm();
+            }
+        });
+    </script>
+</body>
+
+</html>
